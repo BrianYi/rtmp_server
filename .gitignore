@@ -47,3 +47,7 @@ ui_*.h
 Release/
 Debug/
 *.dump
+*.h264
+*.mp4
+*.flv
+*.wmv
