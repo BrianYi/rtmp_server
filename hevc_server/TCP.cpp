@@ -102,12 +102,7 @@ INT32 TCP::send( const char* inContent, const size_t& inSize )
 		return -1;
 	}
 
-	INT32 sentBytes = ::send(this->m_socketID, inContent, inSize, 0);
-	if (sentBytes == -1)
-	{
-		printf("[send] with %s:%u cannot finish!\n", this->m_address.getIP().c_str(), this->m_address.getPort());
-	}
-	return sentBytes;
+	return ::send( this->m_socketID, inContent, inSize, 0 );
 }
 
 INT32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
@@ -123,8 +118,7 @@ INT32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-	INT32 receivedBytes = ::recv(this->m_socketID, outContent, inSize, 0);
-	return receivedBytes;
+	return ::recv( this->m_socketID, outContent, inSize, 0 );
 }
 
 Address TCP::getAddress( void )
