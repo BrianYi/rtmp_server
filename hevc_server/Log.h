@@ -27,7 +27,7 @@
 #include <winsock2.h>
 
 #ifdef _DEBUG
-#undef NODEBUG
+#define _NOHEXSTR
 #endif
 
 typedef enum

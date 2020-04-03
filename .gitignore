@@ -51,3 +51,4 @@ Debug/
 *.mp4
 *.flv
 *.wmv
+test/[0-9]*

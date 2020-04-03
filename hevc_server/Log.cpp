@@ -29,7 +29,7 @@
 #include <queue>
 #include <mutex>
 
-//#include "rtmp_sys.h"
+ //#include "rtmp_sys.h"
 #include "Log.h"
 #include <process.h>
 
@@ -54,7 +54,7 @@ static const char *levels[ ] = {
   "DEBUG", "DEBUG2"
 };
 
-static void rtmp_log_default( int level, const char *format, va_list vl, int isPrint)
+static void rtmp_log_default( int level, const char *format, va_list vl, int isPrint )
 {
 	if ( !startThread ) return;
 	char str[ MAX_PRINT_LEN ] = "";
@@ -80,7 +80,7 @@ static void rtmp_log_default( int level, const char *format, va_list vl, int isP
 	}
 }
 
-static unsigned int CALLBACK thread_func_for_logger(void * )
+static unsigned int CALLBACK thread_func_for_logger( void * )
 {
 	while ( startThread )
 	{
@@ -160,7 +160,7 @@ void RTMP_LogAndPrintf( int level, const char *format, ... )
 		return;
 
 	va_start( args, format );
-	cb( level, format, args, true);
+	cb( level, format, args, true );
 	va_end( args );
 }
 
@@ -168,6 +168,11 @@ static const char hexdig[ ] = "0123456789abcdef";
 
 void RTMP_LogHex( int level, const uint8_t *data, unsigned long len )
 {
+#ifdef _DEBUG
+#ifdef _NOHEXSTR
+	return;
+#endif
+#endif // _DEBUG
 	if ( !startThread ) return;
 	unsigned long i;
 	char line[ 50 ], *ptr;
@@ -201,6 +206,12 @@ void RTMP_LogHex( int level, const uint8_t *data, unsigned long len )
 
 void RTMP_LogHexStr( int level, const uint8_t *data, unsigned long len )
 {
+#ifdef _DEBUG
+#ifdef _NOHEXSTR
+	return;
+#endif
+#endif // _DEBUG
+
 	if ( !startThread ) return;
 #define BP_OFFSET 9
 #define BP_GRAPH 60

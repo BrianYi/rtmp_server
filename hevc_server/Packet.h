@@ -61,7 +61,7 @@ struct HEADER
 	int32_t MP;				// more packet?
 	int32_t seq;			// sequence number
 	int64_t timestamp;		// send time
-	char app[ 16 ];		// app
+	char app[ 64 ];		// app
 };
 #pragma pack()
 
@@ -172,7 +172,7 @@ inline PACKET* alloc_packet( const int32_t& size, const int32_t& type, const int
 	pkt->header.MP = MP;
 	pkt->header.seq = seq;			// sequence number
 	pkt->header.timestamp = timestamp;		// send time
-	strcpy( pkt->header.app, app );
+	strncpy( pkt->header.app, app, sizeof pkt->header.app );
 	if ( bodySize > 0 )
 	{
 		memcpy( pkt->body, body, bodySize );
@@ -218,7 +218,7 @@ inline int send_pkt( TCP& conn, const int32_t& size, const int32_t& type, const 
 	pkt.header.MP = htonl( MP );
 	pkt.header.seq = htonl( seq );
 	pkt.header.timestamp = htonll( timestamp );
-	strcpy( pkt.header.app, app );
+	strncpy( pkt.header.app, app, sizeof pkt.header.app );
 	if ( bodySize > 0 )
 		memcpy( pkt.body, body, bodySize );
 	int sendSize = conn.send( ( char * ) &pkt, MAX_PACKET_SIZE, iotype, timeout_ms );
@@ -364,7 +364,30 @@ inline void caculate_statistc( StatisticInfo& stat, PACKET& pkt, int recvOrSend 
 		stat.recvPacketRate = stat.every10sRecvPackets / duration;
 		stat.sendByteRate = stat.every10sSendBytes / duration;
 		stat.sendPacketRate = stat.every10sSendPackets / duration;
+		stat.every10sRecvBytes = 0;
+		stat.every10sRecvPackets = 0;
+		stat.every10sSendBytes = 0;
+		stat.every10sSendPackets = 0;
 		stat.beginTime = currentTime;
 	}
 }
 
+//============================================================================
+//
+// tools
+//
+#ifdef TIME_CACULATE
+#define TIME_BEG(x) \
+int64_t _begTime##x = get_current_milli( ); \
+int32_t _begLine##x =__LINE__;
+
+#define TIME_END(x) \
+int64_t _endTime##x = get_current_milli( ); \
+int64_t _diff##x = _endTime##x - _begTime##x; \
+int64_t _endLine##x=__LINE__; \
+RTMP_Log( RTMP_LOGDEBUG, "runing time is %lldms, %s:[%d %d]", \
+		  _diff##x, __FUNCTION__, _begLine##x, _endLine##x );
+#else
+#define TIME_BEG(x)
+#define TIME_END(x)
+#endif // _DEBUG
