@@ -1,4 +1,4 @@
-HevcPusher=../hevc_pusher/hevc_pusher/hevc_pusher.dump
-HevcServer=../hevc_server/hevc_server/hevc_server.dump
-HevcPuller=../hevc_puller/hevc_puller/hevc_puller.dump
-rm $HevcPusher $HevcServer $HevcPuller
+rtmpPusher=../rtmp_pusher/rtmp_pusher/rtmp_pusher.dump
+rtmpServer=../rtmp_server/rtmp_server/rtmp_server.dump
+rtmpPuller=../rtmp_puller/rtmp_puller/rtmp_puller.dump
+rm $rtmpPusher $rtmpServer $rtmpPuller
