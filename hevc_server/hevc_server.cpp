@@ -1,5 +1,6 @@
-// hevc_server.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*
+ * Copyright (C) 2020 BrianYi, All rights reserved
+ */
 
 #include <iostream>
 #include <thread>
