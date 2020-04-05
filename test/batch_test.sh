@@ -10,26 +10,64 @@
 debug_or_release="release" # debug/release switch
 start_script=start_puller_pusher.sh
 
-puller_num=10
-puller_app="test1.mp4"
-dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
-pusher_num=1
-pusher_app="test1.mp4"
-pusher_video_path="E:\Movie\test video\test.mp4"
-sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+num=10
+for(( i=0; i<num; ++i ))
+do
+	puller_num=1
+	puller_app="test$i.mp4"
+	dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+	pusher_num=1
+	pusher_app="test$i.mp4"
+	pusher_video_path="E:\Movie\test video\test.mp4"
+	sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+done
 
-puller_num=10
-puller_app="test2.mp4"
-dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
-pusher_num=1
-pusher_app="test2.mp4"
-pusher_video_path="E:\Movie\test video\test.mp4"
-sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#puller_num=5
+#puller_app="test1.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="test1.mp4"
+#pusher_video_path="E:\Movie\test video\test.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#
+#puller_num=5
+#puller_app="test2.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="test2.mp4"
+#pusher_video_path="E:\Movie\test video\test.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#
+#puller_num=5
+#puller_app="test3.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="test3.mp4"
+#pusher_video_path="E:\Movie\test video\test.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#
+#puller_num=5
+#puller_app="bbb_sunflower1.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="bbb_sunflower1.mp4"
+#pusher_video_path="E:\Movie\test video\bbb_sunflower.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#
+#puller_num=5
+#puller_app="bbb_sunflower2.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="bbb_sunflower2.mp4"
+#pusher_video_path="E:\Movie\test video\bbb_sunflower.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+#
+#puller_num=5
+#puller_app="test4.mp4"
+#dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
+#pusher_num=1
+#pusher_app="test4.mp4"
+#pusher_video_path="E:\Movie\test video\test.mp4"
+#sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
 
-puller_num=10
-puller_app="test3.mp4"
-dst_dir="D:\VS Documents\source\repos\rtmp_server\test"
-pusher_num=1
-pusher_app="test3.mp4"
-pusher_video_path="E:\Movie\test video\test.mp4"
-sh $start_script "$debug_or_release" $puller_num "$puller_app" "$dst_dir" $pusher_num "$pusher_app" "$pusher_video_path"
+

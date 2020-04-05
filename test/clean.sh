@@ -10,3 +10,10 @@ do
 	read -p "Delete $dir?(y/n)" ans
 	[ "$ans" != "n" ] && rm -r $dir
 done
+
+read -p "Delete all other single dump file?(y/n)" ans
+if [ "$ans" != "n" ]; then
+	rm '../../rtmp_pusher/rtmp_pusher/rtmp_pusher.dump'
+	rm '../../rtmp_server/rtmp_server/rtmp_server.dump'
+	rm '../../rtmp_puller/rtmp_puller/rtmp_puller.dump'
+fi

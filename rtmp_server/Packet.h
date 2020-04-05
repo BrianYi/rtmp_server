@@ -242,7 +242,7 @@ inline int send_pkt( TCP& conn, const int32_t& size, const int32_t& type, const 
 		memcpy( pkt.body, body, bodySize );
 	int sendSize = conn.send( ( char * ) &pkt, MAX_PACKET_SIZE, iotype, timeout_ms );
 
-	if ( sendSize > 0 )
+	if ( sendSize == MAX_PACKET_SIZE )
 	{
 #ifdef KEEP_TRACK_PACKET_SND_HEX
 		RTMP_LogHexStr( RTMP_LOGDEBUG, ( uint8_t * ) &pkt, packSize );
@@ -250,7 +250,7 @@ inline int send_pkt( TCP& conn, const int32_t& size, const int32_t& type, const 
 	}
 	else
 	{
-		RTMP_Log( RTMP_LOGDEBUG, "send failed with error: %d\n", WSAGetLastError( ) );
+		RTMP_Log( RTMP_LOGDEBUG, "send %d byte, send failed with error: %d\n", sendSize, WSAGetLastError( ) );
 	}
 
 	return sendSize;
@@ -266,9 +266,9 @@ inline int send_packet( TCP& conn, PACKET& pkt, IOType iotype = Blocking, time_t
 inline int recv_packet( TCP& conn, PACKET& pkt, IOType iotype = Blocking, time_t timeout_ms = 1000 )
 {
 	int recvSize = conn.receive( ( char * ) &pkt, MAX_PACKET_SIZE, iotype, timeout_ms );
-	if ( recvSize <= 0 )
+	if ( recvSize != MAX_PACKET_SIZE )
 	{
-		RTMP_Log( RTMP_LOGDEBUG, "recv failed with error: %d\n", WSAGetLastError( ) );
+		RTMP_Log( RTMP_LOGDEBUG, "recv %d byte, recv failed with error: %d\n", recvSize, WSAGetLastError( ) );
 		return recvSize;
 	}
 

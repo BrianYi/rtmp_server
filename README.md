@@ -1,6 +1,6 @@
 # Introduction
 
-**Platform**: Windows
+**Platform**: Windows, Linux(Planning)
 
 RTMP like protocol implementation, but without complicated header, it can be used as realtime transfer.  
 they are where it can be used to:  
@@ -72,6 +72,7 @@ all the generated files and pulling data would store at `dst_dir`, every pusher 
 
 # TODO
 - [ ] make it high stability, support more connection(more than 64)
+- [ ] transplant to Linux
 
 # BUGS
 - [ ] `fd_set` can only support 64 connection, it means server supported connection maximum is 64

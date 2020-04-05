@@ -515,12 +515,14 @@ int thread_func_for_sender( void *arg )
 				{
 					FD_ZERO( &testFd );
 					FD_SET( timeoutPullersCopy.fd_array[ i ], &testFd );
-					if ( select( 0, nullptr, &testFd, nullptr, &tm ) <= 0 )
+					int ret = select( 0, nullptr, &testFd, nullptr, &tm );
+					if ( ret == 0 )
 						continue;
+					else if ( ret < 0 )
+						RTMP_LogAndPrintf( RTMP_LOGDEBUG, "select error %d, %s:%d", ret, __FUNCTION__, __LINE__ );
 					else
 					{
 						FD_CLR( timeoutPullersCopy.fd_array[ i ], &timeoutPullers );
-
 // 						currentTime = get_current_milli( );
 // 						waitTime = ptrPkt->header.timestamp - currentTime;
 // 						if ( waitTime > 0 )
